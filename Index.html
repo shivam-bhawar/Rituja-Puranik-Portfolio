@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+	
+		<title> Rituja Puranik Portfolio </title>
+		
+		<style>
+			#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000; /* Solid black */
+  color: #00ff00; /* Console green */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-family: 'Courier New', Courier, monospace; /* Console-style font */
+  text-align: center;
+  padding: 20px;
+}
+
+#overlay button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #00ff00;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#overlay button:hover {
+  background-color: white;
+color: black;
+}
+
+#ready-btn {
+  transition: opacity 0.5s ease;
+}
+
+	
+			#hide 
+			{
+				position: absolute;
+				top: 89.5%;
+				left: 81.5%;
+				z-index: 999;
+				background-color: black;
+				height: 7%;
+				border-radius: 10px;
+			}
+			
+			h1
+			{
+				font-size: 90%;
+				color: white;
+				font-family: Arial, sans-serif;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="hide">
+			<h1> &nbsp;&nbsp;&nbsp; Rituja Puranik - Portfolio &nbsp; &nbsp; &nbsp; </h1>
+		</div>
+		
+		<div id="overlay">
+  <h2 id="welcome-text"></h2>
+  <p id="sub-text"></p>
+  <button id="ready-btn" onclick="hideOverlay()" style="display: none;">Ready</button>
+</div>
+
+
+
+
+		<div id="main-content">
+			<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.44/build/spline-viewer.js"></script>
+			<spline-viewer loading-anim-type="none" url="https://prod.spline.design/IvaCis2T5aMefx3p/scene.splinecode"></spline-viewer>
+		</div>
+		
+		<script>
+  const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+
+  const desktopWelcomeText = "Hi there! Thank you for visiting my portfolio.";
+  const desktopSubText = "Click on 'Ready' to get started";
+
+  const mobileWelcomeText = "Hello, User. Please open this website on a Computer to have a better experience.";
+  const mobileSubText = "";
+
+  let i = 0, j = 0;
+
+  function typeText() {
+    const welcome = isMobile ? mobileWelcomeText : desktopWelcomeText;
+    if (i < welcome.length) {
+      document.getElementById("welcome-text").innerHTML += welcome.charAt(i);
+      i++;
+      setTimeout(typeText, 50);
+    } else {
+      typeSubText();
+    }
+  }
+
+  function typeSubText() {
+    const sub = isMobile ? mobileSubText : desktopSubText;
+    if (j < sub.length) {
+      document.getElementById("sub-text").innerHTML += sub.charAt(j);
+      j++;
+      setTimeout(typeSubText, 50);
+    } else {
+      if (!isMobile) {
+        document.getElementById("ready-btn").style.display = "inline-block";
+      }
+    }
+  }
+
+  function hideOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+  window.onload = typeText;
+</script>
+
+
+
+		
+	</body>
+</html>
