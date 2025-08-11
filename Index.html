@@ -86,12 +86,14 @@
 				<button id="ready-btn" onclick="hideOverlay()" style="display: none;">Ready</button>
 			</div>
 		</div>
+		
+		<audio id="bg-audio" loop>
+		  <source src="https://raw.githubusercontent.com/shivam-bhawar/Rituja-Puranik-Portfolio/main/Office%20-%20Background%20Sound.mp3">
+		</audio>
 
 		<!--Spline 3d Scene-->
-		<div id="main-content">
-			<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.44/build/spline-viewer.js"></script>
-			<spline-viewer loading-anim-type="none" url="https://prod.spline.design/IvaCis2T5aMefx3p/scene.splinecode"></spline-viewer>
-		</div>
+		<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.44/build/spline-viewer.js"></script>
+		<spline-viewer loading-anim-type="none" url="https://prod.spline.design/IvaCis2T5aMefx3p/scene.splinecode"></spline-viewer>
 		
 		<script>
 			const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);	
@@ -138,6 +140,11 @@
 			function hideOverlay() 
 			{
 				document.getElementById('overlay').style.display = 'none';
+				
+				//Play Background Music
+				const audio = document.getElementById('bg-audio');
+				audio.muted = false; 
+				audio.play();
 			}
 
 			window.onload = typeText;
