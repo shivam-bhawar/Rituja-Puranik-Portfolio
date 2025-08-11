@@ -38,7 +38,7 @@
 				font-family: "Press Start 2P", system-ui;
 				font-weight: 400;
 				font-style: normal;
-				font-size: 1vw;
+				font-size: 13px;
 				color: white;
 				background-color: black;
 				border: 1px solid black;
@@ -71,7 +71,7 @@
 
 			#welcome-text, #sub-text 
 			{
-				font-size: 1vw; 
+				font-size: 13px; 
 				line-height: 1.5;
 			}
 		</style>
@@ -81,7 +81,7 @@
 		<!--Welcome Screen Background Overlay-->
 		<div id="overlay">
 			<div id="text-container">
-				<h2 id="welcome-text"></h2>
+				<p id="welcome-text"></p>
 				<p id="sub-text"></p>
 				<button id="ready-btn" onclick="hideOverlay()" style="display: none;">Ready</button>
 			</div>
@@ -129,10 +129,6 @@
 				else 
 				{
 					if (!isMobile) 
-					{
-						document.getElementById("ready-btn").style.display = "inline-block";
-					}
-					else
 					{
 						document.getElementById("ready-btn").style.display = "inline-block";
 					}
