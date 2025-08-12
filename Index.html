@@ -42,7 +42,6 @@
 				color: white;
 				background-color: black;
 				border: 1px solid black;
-				margin-top: 2vw;
 				padding: 1vw 2vw;
 				transition: opacity 0.5s ease;
 				cursor: pointer;
@@ -59,19 +58,25 @@
 			#text-container 
 			{
 				font-family: "Press Start 2P", system-ui;
-				font-weight: 200;
+				font-weight: 100;
 				font-style: normal;
 				position: absolute;
-				top: 35vh; 
+				top: 32vh; 
 				left: 50vw;
 				transform: translate(-50%, -50%);
 				text-align: center;
 				width: 80vw; 
 			}
 
-			#welcome-text, #sub-text 
+			#welcome-text, #sub-text
 			{
-				font-size: 13px; 
+				font-size: 1vw; 
+				line-height: 1.5;
+			}
+			
+			#instruction-text
+			{
+				font-size: 10px; 
 				line-height: 1.5;
 			}
 		</style>
@@ -82,6 +87,9 @@
 		<div id="overlay">
 			<div id="text-container">
 				<p id="welcome-text"></p>
+				<br>
+				<div id="instruction-text"></div>
+				<br>
 				<p id="sub-text"></p>
 				<button id="ready-btn" onclick="hideOverlay()" style="display: none;">Ready</button>
 			</div>
@@ -98,11 +106,12 @@
 		<script>
 			const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);	
 			const desktopWelcomeText = "Hi, there! You’ve stumbled upon something special.";
+			const instructionset = "";
 			const desktopSubText = "Click on 'Ready' and pretend it’s 1984 again.";
 			const mobileWelcomeText = "Nice try, Mobile User. But this experience was handcrafted for a Desktop. Trust me - it’s worth the switch.";
 			const mobileSubText = "";
 
-			let i = 0, j = 0;	
+			let i = 0, j = 0, k = 0;	
 			
 			function typeText() 
 			{
@@ -115,17 +124,46 @@
 				} 
 				else 
 				{
-					typeSubText();
+					typeInstructionText();
 				}
 			}
+
+			function typeInstructionText() 
+			{
+				const instructions = 
+				[
+					"This isn’t your average website. It’s a time machine. Buckle up and click wisely:",
+					"1. Click on the Macintosh Body — yes, that chunky beige box on the table.",
+					"2. Hit the Start Button — it's at the bottom",
+					"3. Tap the Computer Screen — because obviously, that’s where the magic happens."
+				];
+
+
+				let stepIndex = 0;
+
+				function typeStep() {
+					if (stepIndex < instructions.length) {
+						const p = document.createElement("p");
+						p.innerHTML = instructions[stepIndex];
+						document.getElementById("instruction-text").appendChild(p);
+						stepIndex++;
+						setTimeout(typeStep, 800); 
+				 } else {
+						typeSubText(); 
+					}
+				}
+
+				typeStep();
+			}
+
 
 			function typeSubText() 
 			{
 				const sub = isMobile ? mobileSubText : desktopSubText;
-				if (j < sub.length) 
+				if (k < sub.length) 
 				{
-					document.getElementById("sub-text").innerHTML += sub.charAt(j);
-					j++;
+					document.getElementById("sub-text").innerHTML += sub.charAt(k);
+					k++;
 					setTimeout(typeSubText, 50);
 				} 
 				else 
