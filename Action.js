@@ -9,6 +9,7 @@ let i = 0, j = 0;
 
 if(isMobile)
 {
+	alert("Hello World!");
 	document.getElementById("welcome-text").style.fontSize = "20px";
 }
 
@@ -123,4 +124,5 @@ document.addEventListener("DOMContentLoaded", () =>
 
 // Call to first Function which starts displaying the Welcome Text on Page Load
 window.onload = typeText;
+
 
