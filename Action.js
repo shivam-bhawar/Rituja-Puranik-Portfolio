@@ -9,7 +9,7 @@ let i = 0, j = 0;
 
 if(isMobile)
 {
-	document.getElementById("welcome-text").style.fontSize = "10px";
+	document.getElementById("welcome-text").style.fontSize = "20px";
 }
 
 // Function to display the Welcome Text with animation
@@ -123,3 +123,4 @@ document.addEventListener("DOMContentLoaded", () =>
 
 // Call to first Function which starts displaying the Welcome Text on Page Load
 window.onload = typeText;
+
