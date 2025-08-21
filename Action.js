@@ -5,13 +5,7 @@ const desktopSubText = "Click on 'Ready' and pretend it’s 1984 again.";
 const mobileWelcomeText = "Nice try, Mobile User. But this experience was handcrafted for a Desktop. Trust me - it’s worth the switch.";
 const mobileSubText = "";
 
-let i = 0, j = 0;	
-
-if(isMobile)
-{
-	alert("Hello World!");
-	document.getElementById("welcome-text").style.fontSize = "20px";
-}
+let i = 0, j = 0;
 
 // Function to display the Welcome Text with animation
 function typeText() 
@@ -124,5 +118,3 @@ document.addEventListener("DOMContentLoaded", () =>
 
 // Call to first Function which starts displaying the Welcome Text on Page Load
 window.onload = typeText;
-
-
