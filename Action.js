@@ -7,6 +7,11 @@ const mobileSubText = "";
 
 let i = 0, j = 0;	
 
+if(isMobile)
+{
+	document.getElementById("welcome-text").style.fontSize = "10px";
+}
+
 // Function to display the Welcome Text with animation
 function typeText() 
 {
