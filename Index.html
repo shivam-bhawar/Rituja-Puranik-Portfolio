@@ -8,7 +8,8 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Press+Start+2P&display=swap" rel="stylesheet">
-	
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+		
 		<title> Rituja Puranik - Portfolio </title>
 		
 		<style>
@@ -74,10 +75,41 @@
 				line-height: 1.5;
 			}
 			
-			#instruction-text
+			#instruction-popup 
 			{
-				font-size: 10px; 
-				line-height: 1.5;
+				display: none;
+				position: absolute;
+				bottom: 20px;
+				right: 20px;
+				width: 300px;
+				background-color: white;
+				border: 2px solid black;
+				box-shadow: 5px 5px 0 #000;
+				padding: 15px;
+				font-family: "Press Start 2P", system-ui;
+				font-size: 10px;
+				z-index: 10;
+				transition: all 1s ease;
+				overflow: hidden;
+			}
+
+			#instruction-popup.collapsed 
+			{
+				height: 40px;
+				width: 150px;
+				padding: 10px;
+			}
+
+			#instruction-popup.collapsed #instruction-content 
+			{
+				display: none;
+			}
+			
+			#collapse-btn
+			{
+				position: absolute;
+				bottom: 2px;
+				right: 2px;
 			}
 		</style>
 	</head>
@@ -87,9 +119,6 @@
 		<div id="overlay">
 			<div id="text-container">
 				<p id="welcome-text"></p>
-				<br>
-				<div id="instruction-text"></div>
-				<br>
 				<p id="sub-text"></p>
 				<button id="ready-btn" onclick="hideOverlay()" style="display: none;">Ready</button>
 			</div>
@@ -99,9 +128,19 @@
 		  <source src="https://raw.githubusercontent.com/shivam-bhawar/Rituja-Puranik-Portfolio/main/Office%20-%20Background%20Sound.mp3">
 		</audio>
 
-		<!--Spline 3d Scene-->
-		<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.44/build/spline-viewer.js"></script>
-		<spline-viewer loading-anim-type="none" url="https://prod.spline.design/IvaCis2T5aMefx3p/scene.splinecode"></spline-viewer>
+		<div id="spline-container" style="position: relative;">
+			<!--Spline 3d Scene-->
+			<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.44/build/spline-viewer.js"></script>
+			<spline-viewer loading-anim-type="none" url="https://prod.spline.design/IvaCis2T5aMefx3p/scene.splinecode"></spline-viewer>
+						
+			<div id="instruction-popup">
+				<div style="display: flex; justify-content: space-between; align-items: center;">
+					<p style="margin: 0;">User Manual v6.0F2</p>
+					<button id="collapse-btn" style="background: none; border: none; cursor: pointer;"><span class="material-symbols-outlined">disabled_by_default</span></button>
+				</div>
+				<div id="instruction-content"></div>
+			</div>	
+		</div>
 		
 		<script>
 			const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);	
@@ -124,38 +163,9 @@
 				} 
 				else 
 				{
-					typeInstructionText();
+					typeSubText();
 				}
 			}
-
-			function typeInstructionText() 
-			{
-				const instructions = 
-				[
-					"This isn’t your average website. It’s a time machine. Buckle up and click wisely:",
-					"1. Click on the Macintosh Body — yes, that chunky beige box on the table.",
-					"2. Hit the Start Button — it's at the bottom",
-					"3. Tap the Computer Screen — because obviously, that’s where the magic happens."
-				];
-
-
-				let stepIndex = 0;
-
-				function typeStep() {
-					if (stepIndex < instructions.length) {
-						const p = document.createElement("p");
-						p.innerHTML = instructions[stepIndex];
-						document.getElementById("instruction-text").appendChild(p);
-						stepIndex++;
-						setTimeout(typeStep, 800); 
-				 } else {
-						typeSubText(); 
-					}
-				}
-
-				typeStep();
-			}
-
 
 			function typeSubText() 
 			{
@@ -183,8 +193,58 @@
 				const audio = document.getElementById('bg-audio');
 				audio.muted = false; 
 				audio.play();
+				
+				const popup = document.getElementById('instruction-popup');
+				popup.style.display = 'block';
+				typeInstructionText();
+			}
+			
+			function typeInstructionText() 
+			{
+				const instructions = 
+				[
+					"1. Click on the Macintosh Body — yes, that chunky beige box on the table.",
+					"2. Hit the Start Button — it's at the bottom",
+					"3. Tap the Computer Screen — because obviously, that’s where the magic happens."
+				];
+				
+				const content = document.getElementById("instruction-content");
+				let index = 0;
+
+				function typeLine() 
+				{
+					if (index < instructions.length) 
+					{
+						content.innerHTML += instructions[index] + "<br><br>";
+						index++;
+						setTimeout(typeLine, 750);
+					}
+				}
+
+				typeLine();
 			}
 
+			document.addEventListener("DOMContentLoaded", () => 
+			{
+				const collapseBtn = document.getElementById("collapse-btn");
+				const iconSpan = collapseBtn.querySelector("span");
+				const popup = document.getElementById("instruction-popup");
+
+				collapseBtn.addEventListener("click", () => 
+				{
+					popup.classList.toggle("collapsed");
+
+					if (popup.classList.contains("collapsed")) 
+					{
+						iconSpan.innerHTML = "slideshow";
+					} 
+					else 
+					{
+					  iconSpan.innerHTML = "disabled_by_default";
+					}
+				});
+			});
+			
 			window.onload = typeText;
 		</script>
 	</body>
